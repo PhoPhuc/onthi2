@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trang Ôn Thi</title>
+  <style>
+    /* Reset CSS */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    /* Cập nhật nền cho trang */
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: rgb(9,87,255);
+      background: linear-gradient(108deg, rgba(9,87,255,1) 0%, rgba(255,255,255,1) 32%, rgba(120,233,250,1) 48%, rgba(157,255,91,1) 78%, rgba(255,246,246,1) 100%);
+    }
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    h1 {
+      text-align: center;
+      color: #2c3e50;
+      margin-bottom: 40px;
+      font-size: 2.5em;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+    .categories {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+    .category-btn {
+      padding: 12px 25px;
+      border: none;
+      background: #3498db;
+      color: white;
+      border-radius: 25px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+    .category-btn:hover {
+      transform: translateY(-3px);
+      background: #2980b9;
+      box-shadow: 0 6px 8px rgba(0,0,0,0.2);
+    }
+    .category-btn.active {
+      transform: translateY(-3px);
+      background: #0d47a1;
+      border: 2px solid #0d47a1;
+      box-shadow: 0 6px 8px rgba(0,0,0,0.2);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      padding: 20px;
+    }
+    /* Áp dụng hiệu ứng glassmorphism cho card */
+    .card {
+      background: rgba(255, 255, 255, 0.15); /* Nền bán trong suốt */
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      cursor: pointer;
+      backdrop-filter: blur(10px); /* Hiệu ứng làm mờ phía sau */
+    }
+    .card:hover {
+      transform: translateY(-10px) scale(1.03);
+      box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    }
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+    .card:hover img {
+      transform: scale(1.1);
+    }
+    .card-content {
+      padding: 20px;
+    }
+    .card h3 {
+      color: #2c3e50;
+      margin-bottom: 10px;
+      font-size: 1.2em;
+    }
+    .card p {
+      color: #7f8c8d;
+      font-size: 0.9em;
+      line-height: 1.5;
+      margin-bottom: 15px;
+    }
+    .card a {
+      display: inline-block;
+      padding: 8px 20px;
+      background: #3498db;
+      color: white;
+      text-decoration: none;
+      border-radius: 20px;
+      transition: background 0.3s ease;
+    }
+    .card a:hover {
+      background: #2980b9;
+    }
+    /* Màu sắc đặc trưng cho từng môn học */
+    .card[data-category="vat-li"] img {
+      border-bottom: 3px solid #8e44ad;
+    }
+    .card[data-category="hoa-hoc"] img {
+      border-bottom: 3px solid #e74c3c;
+    }
+    .card[data-category="sinh-hoc"] img {
+      border-bottom: 3px solid #27ae60;
+    }
+    .card[data-category="tin-hoc"] img {
+      border-bottom: 3px solid #f1c40f;
+    }
+    .card[data-category="lich-su"] img {
+      border-bottom: 3px solid #d35400;
+    }
+    @media (max-width: 768px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+      h1 {
+        font-size: 2em;
+      }
+    }
+    /* Hiệu ứng khi mở trang và lướt web */
+    .animate-on-scroll {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+    .animate-on-scroll.animate {
+      animation: popIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) forwards;
+    }
+    @keyframes popIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.8);
+      }
+      60% {
+        opacity: 1;
+        transform: scale(1.05);
+      }
+      100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="animate-on-scroll">📚 Trang Ôn Thi</h1>
+    <div class="categories animate-on-scroll">
+      <button class="category-btn active" data-category="all">Tất cả</button>
+      <button class="category-btn" data-category="vat-li">Vật lí</button>
+      <button class="category-btn" data-category="hoa-hoc">Hoá học</button>
+      <button class="category-btn" data-category="sinh-hoc">Sinh học</button>
+      <button class="category-btn" data-category="tin-hoc">Tin học</button>
+      <button class="category-btn" data-category="lich-su">Lịch sử</button>
+    </div>
+    <div class="grid">
+      <div class="card animate-on-scroll" data-category="vat-li">
+        <img src="https://chantroisangtao.vn/wp-content/uploads/2023/02/1-1.png">
+        <div class="card-content">
+          <h3>Ôn thi Vật lí</h3>
+          <p>Ôn tập kiến thức Vật lí cho kỳ thi sắp tới.</p>
+          <a href="https://example.com/onti/vat-li" target="_blank">Truy cập</a>
+        </div>
+      </div>
+      <div class="card animate-on-scroll" data-category="hoa-hoc">
+        <img src="https://chantroisangtao.vn/wp-content/uploads/2023/02/1-3.png">
+        <div class="card-content">
+          <h3>Ôn thi Hoá học</h3>
+          <p>Ôn tập kiến thức Hoá học và thực hành.</p>
+          <a href="https://example.com/onti/hoa-hoc" target="_blank">Truy cập</a>
+        </div>
+      </div>
+      <div class="card animate-on-scroll" data-category="sinh-hoc">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz4oWSrBpLG41vnxULKmmzpR9MpcWF3a_MIA&s">
+        <div class="card-content">
+          <h3>Ôn thi Sinh học</h3>
+          <p>Ôn tập các bài học Sinh học cho kỳ thi.</p>
+          <a href="https://example.com/onti/sinh-hoc" target="_blank">Truy cập</a>
+        </div>
+      </div>
+      <div class="card animate-on-scroll" data-category="tin-hoc">
+        <img src="https://www.vietjack.com/sach-moi/images/sach-tin-hoc-lop-11-ket-noi-tri-thuc-sua2024-1.PNG">
+        <div class="card-content">
+          <h3>Ôn thi Tin học</h3>
+          <p>Ôn tập kiến thức Tin học và lập trình cơ bản.</p>
+          <a href="https://example.com/onti/tin-hoc" target="_blank">Truy cập</a>
+        </div>
+      </div>
+      <div class="card animate-on-scroll" data-category="lich-su">
+        <img src="https://product.hstatic.net/200000343833/product/bia_shs__page_29_b256d223092c4ffe996c619adfaf2184_master.jpg" alt="Sách Giáo Khoa Lịch sử Lớp 11">
+        <div class="card-content">
+          <h3>Lịch Sử bài 5</h3>
+          <p>Trắc nghiệm và đúng sai bài 5.</p>
+          <a href="https://azota.vn/de-thi/jbxz4l" target="_blank">Truy cập</a>
+        </div>
+      </div>
+      <div class="card animate-on-scroll" data-category="lich-su">
+        <img src="https://product.hstatic.net/200000343833/product/bia_shs__page_29_b256d223092c4ffe996c619adfaf2184_master.jpg" alt="Sách Giáo Khoa Lịch sử Lớp 11">
+        <div class="card-content">
+          <h3>Lịch Sử bài 6</h3>
+          <p>Trắc nghiệm và đúng sai bài 6.</p>
+          <a href="https://azota.vn/de-thi/oyfwkf" target="_blank">Truy cập</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Lọc card theo danh mục
+    const filterButtons = document.querySelectorAll('.category-btn');
+    const cards = document.querySelectorAll('.card');
+    filterButtons.forEach(button => {
+      button.addEventListener('click', () => {
+        const category = button.dataset.category;
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        cards.forEach(card => {
+          card.style.display = (category === 'all' || card.dataset.category === category) ? 'block' : 'none';
+        });
+      });
+    });
+    // IntersectionObserver để kích hoạt hiệu ứng khi phần tử xuất hiện
+    document.addEventListener('DOMContentLoaded', function() {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animate');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.2 });
+      
+      document.querySelectorAll('.animate-on-scroll').forEach(el => {
+        observer.observe(el);
+      });
+    });
+  </script>
+</body>
+</html>
