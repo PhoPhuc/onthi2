@@ -14,10 +14,14 @@
         h1 {
             text-align: center;
             margin-bottom: 20px;
+            opacity: 0; /* Ẩn ban đầu để áp dụng animation */
+            animation: fadeIn 1s ease-in-out forwards; /* Hiệu ứng fadeIn */
         }
         .filter-section {
             text-align: center;
             margin-bottom: 30px;
+            opacity: 0; /* Ẩn ban đầu để áp dụng animation */
+            animation: fadeIn 1s ease-in-out 0.5s forwards; /* Hiệu ứng fadeIn với độ trễ */
         }
         .filter-section label {
             font-size: 18px;
@@ -37,23 +41,37 @@
         }
         .subject-list li {
             background-color: #1e1e1e; /* Màu nền thẻ tối */
-            margin-bottom: 10px;
-            padding: 10px;
+            margin-bottom: 15px; /* Khoảng cách giữa các mục */
+            padding: 15px;
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Đổ bóng đậm hơn */
             display: flex;
             align-items: center;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            opacity: 0; /* Ẩn ban đầu để áp dụng animation */
+            transform: translateY(20px); /* Dịch chuyển xuống ban đầu */
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Đường kẻ ngang */
+        }
+        .subject-list li:last-child {
+            border-bottom: none; /* Loại bỏ đường kẻ cho mục cuối cùng */
+            margin-bottom: 0; /* Loại bỏ margin-bottom cho mục cuối cùng */
+        }
+        .subject-list li.show {
+            opacity: 1; /* Hiển thị khi có class 'show' */
+            transform: translateY(0); /* Trở về vị trí ban đầu */
+            transition: opacity 0.5s ease, transform 0.5s ease; /* Thêm transition mượt hơn */
         }
         .subject-list li:hover {
             background-color: #2a2a2a; /* Màu nền khi hover */
+            transform: scale(1.02); /* Phóng to nhẹ khi hover */
         }
         .subject-list img {
-            width: 60px;
-            height: 60px;
+            width: 60px; /* Chiều rộng cố định */
+            height: 70px; /* Chiều cao cố định */
             margin-right: 18px;
             border-radius: 6px;
+            object-fit: cover; /* Đảm bảo hình ảnh không bị méo */
         }
         .subject-list .content {
             flex-grow: 1;
@@ -61,7 +79,7 @@
         .subject-list a {
             text-decoration: none;
             color: #ffffff; /* Màu chữ trắng */
-            font-size: 18px;
+            font-size: 22px;
             display: block;
             margin-bottom: 5px;
         }
@@ -74,17 +92,32 @@
         }
 
         /* Viền riêng biệt cho từng môn học */
-        .subject-list li[data-subject="math"] img {
-            border: 2px solid #007bff; /* Xanh dương cho Toán học */
-        }
         .subject-list li[data-subject="physics"] img {
             border: 2px solid #ff0000; /* Đỏ cho Vật lý */
         }
         .subject-list li[data-subject="chemistry"] img {
             border: 2px solid #800080; /* Tím cho Hóa học */
         }
-        .subject-list li[data-subject="literature"] img {
-            border: 2px solid #00ff00; /* Xanh lá cho Ngữ văn */
+        .subject-list li[data-subject="biology"] img {
+            border: 2px solid #007bff; /* Xanh dương cho Sinh học */
+        }
+        .subject-list li[data-subject="informatics"] img {
+            border: 2px solid #ffff00; /* Vàng cho Tin học */
+        }
+        .subject-list li[data-subject="history"] img {
+            border: 2px solid #ffa500; /* Cam cho Lịch sử */
+        }
+
+        /* Keyframes cho hiệu ứng fadeIn */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px); /* Thêm transform để kết hợp di chuyển */
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
@@ -96,89 +129,151 @@
         <label for="subject-filter">Chọn môn học:</label>
         <select id="subject-filter" onchange="filterSubjects()">
             <option value="all">Tất cả</option>
-            <option value="math">Toán học</option>
             <option value="physics">Vật lý</option>
             <option value="chemistry">Hóa học</option>
-            <option value="literature">Ngữ văn</option>
+            <option value="biology">Sinh học</option>
+            <option value="informatics">Tin học</option>
+            <option value="history">Lịch sử</option>
         </select>
     </div>
 
     <!-- Danh sách các môn học -->
     <ul class="subject-list">
-        <li data-subject="math" onclick="window.location.href='https://example.com/math1';">
-            <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fchantroisangtao.vn%2Fhe-tai-nguyen%2Ftoan-11-tap-1-sach-hoc-sinh-ban-doc-gop-y-xa-hoi-bo-sach-giao-khoa-chan-troi-sang-tao%2F&psig=AOvVaw21zSHG38HAC_sfCNXwQFCL&ust=1741598428188000&source=images&cd=vfe&opi=89978449&ved=0CBQQjRxqFwoTCOCz2pPW_IsDFQAAAAAdAAAAABAE" alt="Toán 1">
-            <div class="content">
-                <a href="https://example.com/math1">Ôn tập Đại số</a>
-                <div class="description">Tổng hợp các bài tập và lý thuyết về Đại số cơ bảà nâng cao.</div>
-            </div>
-        </li>
-        <li data-subject="math" onclick="window.location.href='https://example.com/math2';">
-            <img src="https://chantroisangtao.vn/wp-content/uploads/2023/02/1-3.png" alt="Toán 2">
-            <div class="content">
-                <a href="https://example.com/math2">Ôn tập Hình học</a>
-                <div class="description">Các dạng bài</div>
-            </div>
-        </li>
-        <li data-subject="physics" onclick="window.location.href='https://example.com/physics1';">
+        <li data-subject="physics" onclick="window.location.href='https://azota.vn/de-thi/blb7qf';">
             <img src="https://chantroisangtao.vn/wp-content/uploads/2023/02/1-1.png" alt="Vật lý 1">
             <div class="content">
-                <a href="https://example.com/physics1">Ôn tập Cơ học</a>
-                <div class="description">Lý thuyết</div>
+                <a href="https://azota.vn/de-thi/blb7qf">[R28] ĐỀ CƯƠNG VẬT LÝ</a>
+                <div class="description">ngẫu nhiên 28 câu trong toàn bộ đề cương.</div>
             </div>
         </li>
         <li data-subject="physics" onclick="window.location.href='https://example.com/physics2';">
             <img src="https://chantroisangtao.vn/wp-content/uploads/2023/02/1-1.png" alt="Vật lý 2">
             <div class="content">
-                <a href="https://example.com/physics2">Ôn tập Điện học</a>
-                <div class="description">Các khái niệm</div>
+                <a href="https://example.com/physics2">[FULL] ĐỀ CƯƠNG VẬT LÝ</a>
+                <div class="description">Toàn bộ đề cương vật lí.</div>
             </div>
         </li>
-        <li data-subject="chemistry" onclick="window.location.href='https://example.com/chemistry1';">
+        <li data-subject="chemistry" onclick="window.location.href='https://azota.vn/de-thi/xaoyzu';">
             <img src="https://chantroisangtao.vn/wp-content/uploads/2023/02/1-3.png" alt="Hóa học 1">
             <div class="content">
-                <a href="https://example.com/chemistry1">Ôn tập Hóa vô cơ</a>
-                <div class="description">Các phản ứn</div>
+                <a href="https://azota.vn/de-thi/xaoyzu">Hoá Học bài 13</a>
+                <div class="description">Đề cương hoá bài 13. </div>
             </div>
         </li>
-        <li data-subject="chemistry" onclick="window.location.href='https://example.com/chemistry2';">
+        <li data-subject="chemistry" onclick="window.location.href='https://azota.vn/de-thi/ideksh';">
             <img src="https://chantroisangtao.vn/wp-content/uploads/2023/02/1-3.png" alt="Hóa học 2">
             <div class="content">
-                <a href="https://example.com/chemistry2">Ôn tập Hóa hữu cơ</a>
-                <div class="description">Các hợp chất hữu cơ, phản ứn Hóa hữu cơ.</div>
+                <a href="https://azota.vn/de-thi/ideksh">Hoá Học bài 14</a>
+                <div class="description">Đề cương hoá bài 14.</div>
             </div>
         </li>
-        <li data-subject="literature" onclick="window.location.href='https://example.com/literature1';">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz4oWSrBpLG41vnxULKmmzpR9MpcWF3a_MIA&s" alt="Ngữ văn 1">
+        <li data-subject="chemistry" onclick="window.location.href='https://azota.vn/de-thi/voi9l4';">
+            <img src="https://chantroisangtao.vn/wp-content/uploads/2023/02/1-3.png" alt="Hóa học 1">
             <div class="content">
-                <a href="https://example.com/literature1">Ôn tập Văn học Việt Nam</a>
-                <div class="description">Các tác phẩm văn học Vi.</div>
+                <a href="https://azota.vn/de-thi/voi9l4">Hoá Học bài 15</a>
+                <div class="description">Đề cương hoá bài 15.</div>
             </div>
         </li>
-        <li data-subject="literature" onclick="window.location.href='https://example.com/literature2';">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz4oWSrBpLG41vnxULKmmzpR9MpcWF3a_MIA&s" alt="Ngữ văn 2">
+        <li data-subject="chemistry" onclick="window.location.href='https://azota.vn/de-thi/nqks49';">
+            <img src="https://chantroisangtao.vn/wp-content/uploads/2023/02/1-3.png" alt="Hóa học 2">
             <div class="content">
-                <a href="https://example.com/literature2">Ôn tập Văn học nước ngoài</a>
-                <div class="description">Các tác phẩm văn học ng.</div>
+                <a href="https://azota.vn/de-thi/nqks49">Hoá Học bài 16</a>
+                <div class="description">Đề cương hoá bài 16.</div>
+            </div>
+        </li>
+        <li data-subject="biology" onclick="window.location.href='https://azota.vn/de-thi/ixdxfg';">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz4oWSrBpLG41vnxULKmmzpR9MpcWF3a_MIA&s" alt="Sinh học 1">
+            <div class="content">
+                <a href="https://azota.vn/de-thi/ixdxfg">Sinh Học bài 14</a>
+                <div class="description">Đề cương sinh học bài 14</div>
+            </div>
+        </li>
+        <li data-subject="biology" onclick="window.location.href='https://azota.vn/de-thi/uglb0n';">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz4oWSrBpLG41vnxULKmmzpR9MpcWF3a_MIA&s" alt="Sinh học 2">
+            <div class="content">
+                <a href="https://azota.vn/de-thi/uglb0n">Sinh Học bài 15/a>
+                <div class="description">Đề cương sinh học bài 15</div>
+            </div>
+        </li>
+        <li data-subject="biology" onclick="window.location.href='https://azota.vn/de-thi/tdzqsr';">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz4oWSrBpLG41vnxULKmmzpR9MpcWF3a_MIA&s" alt="Sinh học 1">
+            <div class="content">
+                <a href="https://azota.vn/de-thi/tdzqsr">Sinh Học bài 17</a>
+                <div class="description">Đề cương sinh học bài 17</div>
+            </div>
+        </li>
+        <li data-subject="biology" onclick="window.location.href='https://azota.vn/de-thi/stzzfd';">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz4oWSrBpLG41vnxULKmmzpR9MpcWF3a_MIA&s" alt="Sinh học 2">
+            <div class="content">
+                <a href="https://azota.vn/de-thi/stzzfd">Sinh Học bài 18/a>
+                <div class="description">Đề cương sinh học bài 18</div>
+            </div>
+        </li>
+        <li data-subject="biology" onclick="window.location.href='https://azota.vn/de-thi/stzzfd';">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz4oWSrBpLG41vnxULKmmzpR9MpcWF3a_MIA&s" alt="Sinh học 2">
+            <div class="content">
+                <a href="https://azota.vn/de-thi/stzzfd">[FULL] ĐỀ CƯƠNG SINH HỌC/a>
+                <div class="description">full Đề cương sinh học bài</div>
+            </div>
+        </li>
+        <li data-subject="informatics" onclick="window.location.href='https://azota.vn/de-thi/q79yem';">
+            <img src="https://www.vietjack.com/sach-moi/images/sach-tin-hoc-lop-11-ket-noi-tri-thuc-sua2024-1.PNG" alt="Tin học 1">
+            <div class="content">
+                <a href="https://azota.vn/de-thi/q79yem">[28/65] Trắc nghiệm Tin Học</a>
+                <div class="description">Ngẫu nhiên 28 câu trong 65 câu trắc nghiệm</div>
+            </div>
+        </li>
+        <li data-subject="informatics" onclick="window.location.href='https://azota.vn/de-thi/mottg1';">
+            <img src="https://www.vietjack.com/sach-moi/images/sach-tin-hoc-lop-11-ket-noi-tri-thuc-sua2024-1.PNG" alt="Tin học 1">
+            <div class="content">
+                <a href="https://azota.vn/de-thi/mottg1">[FULL] Trắc nghiệm Tin Học</a>
+                <div class="description">Full đề cương trắc nghiệm TIN HỌC.</div>
+            </div>
+        </li>
+        <li data-subject="history" onclick="window.location.href='https://azota.vn/de-thi/f2wvh4';">
+            <img src="https://product.hstatic.net/200000343833/product/bia_shs__page_29_b256d223092c4ffe996c619adfaf2184_master.jpg" alt="Lịch sử 1">
+            <div class="content">
+                <a href="https://azota.vn/de-thi/f2wvh4">[FULL] Trắc nghiệm Lịch Sử</a>
+                <div class="description">Full trắc nghiệm đề cương lịch sử.</div>
+            </div>
+        </li>
+        <li data-subject="history" onclick="window.location.href='https://azota.vn/de-thi/7mbwye';">
+            <img src="https://product.hstatic.net/200000343833/product/bia_shs__page_29_b256d223092c4ffe996c619adfaf2184_master.jpg" alt="Lịch sử 2">
+            <div class="content">
+                <a href="https://azota.vn/de-thi/7mbwye">[28/105] Đề cương Lịch Sử</a>
+                <div class="description">Ngẫu nhiên 28 câu trong 105 câu trắc nghiệm sử.</div>
             </div>
         </li>
     </ul>
 
     <script>
+        // Hiệu ứng khi trang được tải
+        document.addEventListener("DOMContentLoaded", function() {
+            const items = document.querySelectorAll(".subject-list li");
+            items.forEach((item, index) => {
+                setTimeout(() => {
+                    item.classList.add("show"); // Thêm class 'show' để hiển thị từng mục
+                }, index * 200); // Độ trễ giữa các mục
+            });
+        });
+
+        // Lọc môn học và thêm hiệu ứng
         function filterSubjects() {
             const selectedSubject = document.getElementById("subject-filter").value;
             const items = document.querySelectorAll(".subject-list li");
 
-            items.forEach(item => {
+            items.forEach((item, index) => {
                 if (selectedSubject === "all" || item.getAttribute("data-subject") === selectedSubject) {
-                    item.style.display = "flex"; // Hiển thị mục phù hợp
+                    setTimeout(() => {
+                        item.style.display = "flex"; // Hiển thị mục phù hợp
+                        item.classList.add("show"); // Thêm hiệu ứng
+                    }, index * 100); // Độ trễ giữa các mục
                 } else {
                     item.style.display = "none"; // Ẩn mục không phù hợp
+                    item.classList.remove("show"); // Xóa hiệu ứng
                 }
             });
         }
-
-        // Mặc định hiển thị tất cả khi trang được tải
-        document.addEventListener("DOMContentLoaded", filterSubjects);
     </script>
 </body>
 </html>
