@@ -1,65 +1,31 @@
+/* Hiệu ứng đổ sáng vàng tự động cho thẻ môn Sinh học */
+.subject-list li[data-subject="biology"] {
+    animation: glow 1s infinite alternate; /* Hiệu ứng đổ sáng liên tục */
+}
 
-<style>
-  /* Các CSS khác... */
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 5px 5px rgba(255, 223, 0, 0.5); /* Đổ sáng nhẹ */
+    }
+    100% {
+        box-shadow: 0 0 5px 5px rgba(255, 223, 0, 0.9); /* Đổ sáng mạnh */
+    }
+}
+                                                                                                                                                                                                                           
+/* Hiệu ứng fadeIn cho các phần tử */
+.fade-in-element {
+    opacity: 0; /* Ẩn ban đầu */
+    transform: translateY(20px); /* Dịch chuyển xuống ban đầu */
+    animation: fadeIn 0.5s ease-in-out forwards; /* Hiệu ứng fadeIn */
+}
 
-  /* Viền cho các thẻ .card */
-  .card a {
-  display: inline-block;
-  padding: 10px 15px;
-  background: transparent; /* Màu nền trong suốt */
-  color: black; /* Màu chữ đen */
-  text-decoration: none;
-  border-radius: 20px;
-  border: 2px solid black; /* Viền đen cho nút "Truy cập" */
-  transition: background 0.3s ease; /* Thêm hiệu ứng chuyển tiếp */
-  }
-  .card a:hover {
-  background: transparent; /* Giữ màu nền trong suốt khi hover */
-  border: 2px solid black; /* Giữ viền đen khi hover */
-  }
-  .card[data-category="vat-li"] {
-    border: 2px solid red; /* Viền đỏ cho Vật lí */
-  }
-
-  .card[data-category="hoa-hoc"] {
-    border: 2px solid purple; /* Viền tím cho Hoá học */
-  }
-
-  .card[data-category="sinh-hoc"] {
-    border: 2px solid blue; /* Viền xanh dương cho Sinh học */
-  }
-
-  .card[data-category="tin-hoc"] {
-    border: 2px solid yellow; /* Viền vàng cho Tin học */
-  }
-
-  .card[data-category="lich-su"] {
-    border: 2px solid orange; /* Viền cam cho Lịch sử */
-  }
-
-  /* Viền và màu nền cho các nút bấm */
-  .category-btn[data-category="vat-li"] {
-    border: 2px solid red; /* Viền đỏ cho Vật lí */
-    background: red; /* Không có màu nền cho Vật lí */
-  }
-
-  .category-btn[data-category="hoa-hoc"] {
-    border: 2px solid purple; /* Viền tím cho Hoá học */
-    background: purple; /* Màu nền tím cho Hoá học */
-  }
-
-  .category-btn[data-category="sinh-hoc"] {
-    border: 2px solid blue; /* Viền xanh dương cho Sinh học */
-    background: blue; /* Màu nền xanh dương cho Sinh học */
-  }
-
-  .category-btn[data-category="tin-hoc"] {
-    border: 2px solid yellow; /* Viền vàng cho Tin học */
-    background: yellow; /* Màu nền vàng cho Tin học */
-  }
-
-  .category-btn[data-category="lich-su"] {
-    border: 2px solid orange; /* Viền cam cho Lịch sử */
-    background: orange; /* Màu nền cam cho Lịch sử */
-  }
-</style>
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
