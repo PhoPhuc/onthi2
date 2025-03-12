@@ -1,6 +1,6 @@
 /* Hiệu ứng đổ sáng vàng tự động cho thẻ môn Sinh học */
 .subject-list li[data-subject="history"] {
-    animation: glow 1s infinite alternate; /* Hiệu ứng đổ sáng liên tục */
+    animation: glow 1.25s infinite alternate; /* Hiệu ứng đổ sáng liên tục */
 }
 
 @keyframes glow {
@@ -14,7 +14,7 @@
 
 /* Hiệu ứng đổ sáng vàng tự động cho thẻ môn Sinh học */
 .subject-list li[data-subject="informatics"] {
-    animation: glow 1s infinite alternate; /* Hiệu ứng đổ sáng liên tục */
+    animation: glow 1.25s infinite alternate; /* Hiệu ứng đổ sáng liên tục */
 }
 
 @keyframes glow {
