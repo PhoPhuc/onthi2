@@ -14,15 +14,23 @@
         }
         h1 {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
             opacity: 0; /* Ẩn ban đầu để áp dụng animation */
             animation: fadeIn 1s ease-in-out forwards; /* Hiệu ứng fadeIn */
+        }
+        .update-notification {
+            text-align: center;
+            font-size: 14px;
+            color: #ffa500; /* Màu cam để thu hút sự chú ý */
+            margin-bottom: 30px;
+            opacity: 0; /* Ẩn ban đầu để áp dụng animation */
+            animation: fadeIn 0.5s ease-in-out 0.5s forwards; /* Hiệu ứng fadeIn với độ trễ */
         }
         .filter-section {
             text-align: center;
             margin-bottom: 30px;
             opacity: 0; /* Ẩn ban đầu để áp dụng animation */
-            animation: fadeIn 1s ease-in-out 0.5s forwards; /* Hiệu ứng fadeIn với độ trễ */
+            animation: fadeIn 1s ease-in-out 1.5s forwards; /* Hiệu ứng fadeIn với độ trễ */
         }
         .filter-section label {
             font-size: 18px;
@@ -124,6 +132,9 @@
 </head>
 <body>
     <h1>TRANG ÔN THI</h1>
+    <div class="update-notification">
+        ⚠️ <strong>Cảnh Báo: Hiện tại máy chủ Azota đang sập tạm thời. Vui lòng quay lại sau.</strong> ⚠️
+    </div>
 
     <!-- Phần tùy chọn môn học -->
     <div class="filter-section">
