@@ -1,14 +1,28 @@
 /* Hiệu ứng đổ sáng vàng tự động cho thẻ môn Sinh học */
-.subject-list li[data-subject="biology"] {
+.subject-list li[data-subject="history"] {
     animation: glow 1s infinite alternate; /* Hiệu ứng đổ sáng liên tục */
 }
 
 @keyframes glow {
     0% {
-        box-shadow: 0 0 3px 2px rgba(0, 191, 255, 0.5); /* Đổ sáng nhẹ */
+        box-shadow: 0 0 3px 2px rgba(255, 105, 0, 0.5); /* Đổ sáng nhẹ */
     }
     100% {
-        box-shadow: 0 0 5px 3px rgba(30, 144, 255, 0.9); /* Đổ sáng mạnh */
+        box-shadow: 0 0 5px 3px rgba(229, 83, 0, 0.9); /* Đổ sáng mạnh */
+    }
+}
+
+/* Hiệu ứng đổ sáng vàng tự động cho thẻ môn Sinh học */
+.subject-list li[data-subject="informatics"] {
+    animation: glow 1s infinite alternate; /* Hiệu ứng đổ sáng liên tục */
+}
+
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 3px 2px rgba(255, 191, 0, 0.5); /* Đổ sáng nhẹ */
+    }
+    100% {
+        box-shadow: 0 0 5px 3px rgba(255, 234, 0, 0.9); /* Đổ sáng mạnh */
     }
 }
                                                                                                                                                                                                                            
