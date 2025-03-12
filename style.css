@@ -5,10 +5,10 @@
 
 @keyframes glow {
     0% {
-        box-shadow: 0 0 3px 2px rgba(255, 105, 0, 0.5); /* Đổ sáng nhẹ */
+        box-shadow: 0 0 3px 2px rgba(255, 165, 0, 0.5); /* Đổ sáng nhẹ */
     }
     100% {
-        box-shadow: 0 0 5px 3px rgba(229, 83, 0, 0.9); /* Đổ sáng mạnh */
+        box-shadow: 0 0 5px 3px rgba(255, 140, 0, 0.9); /* Đổ sáng mạnh */
     }
 }
 
