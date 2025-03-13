@@ -36,6 +36,51 @@
     }
 }
 
+.info {
+  position: fixed;
+  bottom: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  animation: slideIn 0.5s forwards;
+  z-index: 1000;
+  min-width: 200px;
+}
+
+.info__title {
+  color: #000;
+  font-size: 16px;
+  margin-left: 10px;
+}
+
+@keyframes slideIn {
+  0% {
+    bottom: -100%;
+  }
+  100% {
+    bottom: 20px;
+  }
+}
+
+.info.closing {
+  animation: slideOut 0.5s forwards;
+}
+
+@keyframes slideOut {
+  0% {
+    bottom: 20px;
+  }
+  100% {
+    bottom: -100%;
+  }
+}
 /* Tùy chọn: Thêm độ trễ cho các phần tử fadeIn */
 .fade-in-element:nth-child(1) { animation-delay: 0.1s; }
 .fade-in-element:nth-child(2) { animation-delay: 0.2s; }
