@@ -18,14 +18,6 @@
             opacity: 0; /* Ẩn ban đầu để áp dụng animation */
             animation: fadeIn 1s ease-in-out forwards; /* Hiệu ứng fadeIn */
         }
-        .update-notification {
-            text-align: center;
-            font-size: 14px;
-            color: #00ff00; /* Màu cam để thu hút sự chú ý */
-            margin-bottom: 30px;
-            opacity: 0; /* Ẩn ban đầu để áp dụng animation */
-            animation: fadeIn 0.75s ease-in-out 0.75s forwards; /* Hiệu ứng fadeIn với độ trễ */
-        }
         .filter-section {
             text-align: center;
             margin-bottom: 30px;
@@ -132,8 +124,6 @@
 </head>
 <body>
     <h1>TRANG ÔN THI</h1>
-    <div class="update-notification">
-        🚀 <strong>Học Tin thôiiiiiiii</strong>.
     </div>
 
     <!-- Phần tùy chọn môn học -->
@@ -238,7 +228,7 @@
         <li data-subject="informatics" onclick="window.location.href='https://azota.vn/de-thi/q79yem';">
             <img src="https://www.vietjack.com/sach-moi/images/sach-tin-hoc-lop-11-ket-noi-tri-thuc-sua2024-1.PNG" alt="Tin học 1">
             <div class="content">
-                <a href="https://azota.vn/de-thi/q79yem">[R28] Trắc nghiệm Tin Học</a>
+                <a href="https://azota.vn/de-thi/q79yem">[R28] Trắc nghim Tin Học</a>
                 <div class="description">Ngẫu nhiên 28 câu trong 65 câu trắc nghiệm</div>
             </div>
         </li>
@@ -253,14 +243,14 @@
             <img src="https://product.hstatic.net/200000343833/product/bia_shs__page_29_b256d223092c4ffe996c619adfaf2184_master.jpg" alt="Lịch sử 1">
             <div class="content">
                 <a href="https://azota.vn/de-thi/gwifxc">[ĐỀ 1] Trắc nghiệm Lịch Sử</a>
-                <div class="description">50 câu đầu tiên trắc nghiệm lịch sử.</div>
+                <div class="description">50 câu đầu tiên trắc nghệm lịch sử.</div>
             </div>
         </li>
         <li data-subject="history" onclick="window.location.href='https://azota.vn/de-thi/7mbwye';">
             <img src="https://product.hstatic.net/200000343833/product/bia_shs__page_29_b256d223092c4ffe996c619adfaf2184_master.jpg" alt="Lịch sử 2">
             <div class="content">
                 <a href="https://azota.vn/de-thi/bngqxs">[ĐỀ 2] Đề cương Lịch Sử</a>
-                <div class="description">55 câu còn lại trắc nghiệm sử.</div>
+                <div class="description">55 câu còn lại trắc nghệm ử.</div>
             </div>
         </li>
         <li data-subject="history" onclick="window.location.href='https://azota.vn/de-thi/f2wvh4';">
@@ -310,3 +300,12 @@
     </script>
 </body>
 </html>
+<div class="info" id="notification">
+    <div class="info__icon">
+      <svg fill="none" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="m12 1.5c-5.79844 0-10.5 4.70156-10.5 10.5 0 5.7984 4.70156 10.5 10.5 10.5 5.7984 0 10.5-4.7016 10.5-10.5 0-5.79844-4.7016-10.5-10.5-10.5zm.75 15.5625c0 .1031-.0844.1875-.1875.1875h-1.125c-.1031 0-.1875-.0844-.1875-.1875v-6.375c0-.1031.0844-.1875.1875-.1875h1.125c.1031 0 .1875.0844.1875.1875zm-.75-8.0625c-.2944-.00601-.5747-.12718-.7808-.3375-.206-.21032-.3215-.49305-.3215-.7875s.1155-.57718.3215-.7875c.2061-.21032.4864-.33149.7808-.3375.2944.00601.5747.12718.7808.3375.206.21032.3215.49305.3215.7875s-.1155.57718-.3215.7875c-.2061.21032-.4864.33149-.7808.3375z" fill="#393a37"></path></svg>
+    </div>
+    <div class="info__title">Ôn tin đi mấy ní</div>
+    <div class="info__close" id="closeButton">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" viewBox="0 0 20 20" height="20"><path fill="#393a37" d="m15.8333 5.34166-1.175-1.175-4.6583 4.65834-4.65833-4.65834-1.175 1.175 4.65833 4.65834-4.65833 4.6583 1.175 1.175 4.65833-4.6583 4.6583 4.6583 1.175-1.175-4.6583-4.6583z"></path></svg>
+    </div>
+</div>
