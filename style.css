@@ -1,7 +1,23 @@
 /* Định nghĩa biến CSS cho màu sắc */
 :root {
-    --glow-color-informatics-start: rgba(255, 191, 0, 0.5);
+    --glow-color-chemicial-start: rgba(255, 165, 0, 0.5);
+    --glow-color-chemicial-end: rgba(255, 140, 0, 0.9);
+    --glow-color-physicial-start: rgba(255, 191, 0, 0.5);
     --glow-color-informatics-end: rgba(255, 234, 0, 0.9);
+}
+
+/* Hiệu ứng đổ sáng vàng tự động cho thẻ môn Lịch sử */
+.subject-list li[data-subject="history"] {
+    animation: glow-history 1.25s infinite alternate; /* Hiệu ứng đổ sáng liên tục */
+}
+
+@keyframes glow-history {
+    0% {
+        box-shadow: 0 0 3px 2px var(--glow-color-history-start); /* Đổ sáng nhẹ */
+    }
+    100% {
+        box-shadow: 0 0 5px 3px var(--glow-color-history-end); /* Đổ sáng mạnh */
+    }
 }
 
 /* Hiệu ứng đổ sáng vàng tự động cho thẻ môn Tin học */
