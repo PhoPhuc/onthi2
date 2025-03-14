@@ -1,36 +1,36 @@
 /* Định nghĩa biến CSS cho màu sắc */
 :root {
-    --glow-color-chemicial-start: rgba(255, 165, 0, 0.5);
-    --glow-color-chemicial-end: rgba(255, 140, 0, 0.9);
-    --glow-color-physicial-start: rgba(255, 191, 0, 0.5);
-    --glow-color-informatics-end: rgba(255, 234, 0, 0.9);
+    --glow-color-chemistry-start: rgba(159, 43, 104, 0.5);
+    --glow-color-chemistry-end: rgba(191, 64, 191, 0.9);
+    --glow-color-physics-start: rgba(139, 0, 0, 0.5);
+    --glow-color-physics-end: rgba(210, 4, 45, 0.9);
 }
 
 /* Hiệu ứng đổ sáng vàng tự động cho thẻ môn Lịch sử */
-.subject-list li[data-subject="history"] {
-    animation: glow-history 1.25s infinite alternate; /* Hiệu ứng đổ sáng liên tục */
+.subject-list li[data-subject="chemistry"] {
+    animation: glow-chemistry 1.25s infinite alternate; /* Hiệu ứng đổ sáng liên tục */
 }
 
-@keyframes glow-history {
+@keyframes glow-chemistry {
     0% {
-        box-shadow: 0 0 3px 2px var(--glow-color-history-start); /* Đổ sáng nhẹ */
+        box-shadow: 0 0 3px 2px var(--glow-color-chemistry-start); /* Đổ sáng nhẹ */
     }
     100% {
-        box-shadow: 0 0 5px 3px var(--glow-color-history-end); /* Đổ sáng mạnh */
+        box-shadow: 0 0 5px 3px var(--glow-color-chemistry-end); /* Đổ sáng mạnh */
     }
 }
 
 /* Hiệu ứng đổ sáng vàng tự động cho thẻ môn Tin học */
-.subject-list li[data-subject="informatics"] {
-    animation: glow-informatics 1.25s infinite alternate; /* Hiệu ứng đổ sáng liên tục */
+.subject-list li[data-subject="physics"] {
+    animation: glow-physics 1.25s infinite alternate; /* Hiệu ứng đổ sáng liên tục */
 }
 
-@keyframes glow-informatics {
+@keyframes glow-physics {
     0% {
-        box-shadow: 0 0 3px 2px var(--glow-color-informatics-start); /* Đổ sáng nhẹ */
+        box-shadow: 0 0 3px 2px var(--glow-color-physics-start); /* Đổ sáng nhẹ */
     }
     100% {
-        box-shadow: 0 0 5px 3px var(--glow-color-informatics-end); /* Đổ sáng mạnh */
+        box-shadow: 0 0 5px 3px var(--glow-color-physics-end); /* Đổ sáng mạnh */
     }
 }
 
