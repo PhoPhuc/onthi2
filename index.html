@@ -3,316 +3,252 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang ôn thi</title>
     <link rel="stylesheet" href="style.css"> <!-- Liên kết file CSS -->
-    <script src="index.js"></script> <!-- Liên kết file JavaScript -->
+    <link rel="icon" type="image/png" href="https://www.freeiconspng.com/uploads/study-icon-19.png">
+    <title>Trang Ôn Thi</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            background-color: #121212; /* Màu nền tối */
-            color: #ffffff; /* Màu chữ trắng */
-            padding: 20px;
+            font-family: Montserrat, sans-serif;
+            background-color: #000;
+            color: #fff;
+            padding: 15px;
+            margin: auto;
         }
         h1 {
+            color: #fff;
             text-align: center;
-            margin-bottom: 10px;
-            opacity: 0; /* Ẩn ban đầu để áp dụng animation */
-            animation: fadeIn 1s ease-in-out forwards; /* Hiệu ứng fadeIn */
-        }
-        .filter-section {
-            text-align: center;
-            margin-bottom: 30px;
-            opacity: 0; /* Ẩn ban đầu để áp dụng animation */
-            animation: fadeIn 0.75s ease-in-out 0.75s forwards; /* Hiệu ứng fadeIn với độ trễ */
-        }
-        .filter-section label {
-            font-size: 18px;
-            margin-right: 10px;
-        }
-        .filter-section select {
-            padding: 5px 10px;
-            font-size: 16px;
-            border-radius: 10px;
-            background-color: #1e1e1e;
-            color: #ffffff;
-            border: 1px solid #007bff;
+            margin-bottom: 20px;
         }
         .subject-list {
-            list-style-type: none;
-            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1px;
+            justify-content: center;
         }
-        .subject-list li {
-            background-color: #1e1e1e; /* Màu nền thẻ tối */
-            margin-bottom: 15px; /* Khoảng cách giữa các mục */
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3); /* Đổ bóng đậm hơn */
+        .subject {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: left;
+            padding: 10px;
+            border-radius: 15px;
+            box-shadow: 0 10px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            background-color: transparent;
+            width: 160px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInSlideUp 0.8s ease forwards;
+            margin: 0px;
+        }
+        .subject:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+        .subject img {
+            width: 160px;
+            height: 160px;
+            border-radius: 15px;
+            object-fit: cover;
+            border: 1.4px solid #808080;
+        }
+        .subject-info {
+            margin-top: 8px;
+            width: 100%;
+        }
+        .subject-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+        .subject-link {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        @keyframes fadeInSlideUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .group {
             display: flex;
             align-items: center;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.3s ease;
-            opacity: 0; /* Ẩn ban đầu để áp dụng animation */
-            transform: translateY(20px); /* Dịch chuyển xuống ban đầu */
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Đường kẻ ngang */
+            justify-content: center;
+            margin-bottom: 0px;
+            position: relative;
+            width: 100%;
+            max-width: 190px;
+            margin: 0 auto 20px;
         }
-        .subject-list li:last-child {
-            border-bottom: none; /* Loại bỏ đường kẻ cho mục cuối cùng */
-            margin-bottom: 0; /* Loại bỏ margin-bottom cho mục cuối cùng */
+
+        .search-icon {
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            left: 12px;
+            fill: #b3b3b3;
         }
-        .subject-list li.show {
-            opacity: 1; /* Hiển thị khi có class 'show' */
-            transform: translateY(0); /* Trở về vị trí ban đầu */
-            transition: opacity 0.5s ease, transform 0.5s ease; /* Thêm transition mượt hơn */
+
+        .input {
+            width: 100%;
+            padding: 10px 10px 10px 40px;
+            border-radius: 25px;
+            border: 1px solid #808080;
+            background-color: transparent;
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.3s ease;
         }
-        .subject-list li:hover {
-            background-color: #2a2a2a; /* Màu nền khi hover */
-            transform: scale(1.02); /* Phóng to nhẹ khi hover */
+
+        .input:focus {
+            border-color: #1DB954;
         }
-        .subject-list img {
-            width: 60px; /* Chiều rộng cố định */
-            height: 65px; /* Chiều cao cố định */
-            margin-right: 18px;
-            border-radius: 10px;
-            object-fit: cover; /* Đảm bảo hình ảnh không bị méo */
+
+        .input::placeholder {
+            color: #b3b3b3;
         }
-        .subject-list .content {
-            flex-grow: 1;
-        }
-        .subject-list a {
+        .report-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 10px 20px;
+            background-color: #000000;
+            color: #fff;
             text-decoration: none;
-            color: #ffffff; /* Màu chữ trắng */
-            font-size: 22px;
-            display: block;
-            margin-bottom: 5px;
-        }
-        .subject-list a:hover {
-            color: #007bff; /* Màu chữ khi hover */
-        }
-        .subject-list .description {
-            font-size: 14px;
-            color: #bbbbbb; /* Màu chữ mô tả */
+            border-radius: 40px;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 12, 0, 1);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            z-index: 1000;
+            border: 2px solid #ffffff;
         }
 
-        /* Viền riêng biệt cho từng môn học */
-        .subject-list li[data-subject="physics"] img {
-            border: 2px solid #ff0000; /* Đỏ cho Vật lý */
-        }
-        .subject-list li[data-subject="chemistry"] img {
-            border: 2px solid #800080; /* Tím cho Hóa học */
-        }
-        .subject-list li[data-subject="biology"] img {
-            border: 2px solid #007bff; /* Xanh dương cho Sinh học */
-        }
-        .subject-list li[data-subject="informatics"] img {
-            border: 2px solid #ffff00; /* Vàng cho Tin học */
-        }
-        .subject-list li[data-subject="history"] img {
-            border: 2px solid #ffa500; /* Cam cho Lịch sử */
+        .report-button:hover {
+            background-color: #17a74d;
+            transform: translateY(-2px);
         }
 
-        /* Keyframes cho hiệu ứng fadeIn */
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px); /* Thêm transform để kết hợp di chuyển */
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .report-button:active {
+            transform: translateY(0);
         }
     </style>
-        <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-D086355WFZ"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-D086355WFZ');
-    </script>
 </head>
 <body>
-    <h1>TRANG ÔN THI</h1>
+    <h1>Trang Ôn Thi</h1>
+    <div class="group">
+        <svg viewBox="0 0 24 24" aria-hidden="true" class="search-icon">
+            <g>
+                <path
+                    d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"
+                ></path>
+            </g>
+        </svg>
+        <input
+            id="query"
+            class="input"
+            type="search"
+            placeholder="Search..."
+            name="searchbar"
+        />
     </div>
+    <div class="subject-list">
+        <!-- Tin học -->
+        <a href="tin-hoc.html" class="subject-link">
+            <div class="subject">
+                <img src="https://www.vietjack.com/sach-moi/images/sach-tin-hoc-lop-11-ket-noi-tri-thuc-sua2024-1.PNG" alt="Tin Học">
+                <div class="subject-info">
+                    <div class="subject-title">Tin Học</div>
+                </div>
+            </div>
+        </a>
 
-    <!-- Phần tùy chọn môn học -->
-    <div class="filter-section">
-        <label for="subject-filter">Chọn môn học:</label>
-        <select id="subject-filter" onchange="filterSubjects()">
-            <option value="all">Tất cả</option>
-            <option value="physics">Vật lý</option>
-            <option value="chemistry">Hóa học</option>
-            <option value="biology">Sinh học</option>
-            <option value="informatics">Tin học</option>
-            <option value="history">Lịch sử</option>
-        </select>
+        <!-- Vật lý -->
+        <a href="vat-ly.html" class="subject-link">
+            <div class="subject">
+                <img src="https://chantroisangtao.vn/wp-content/uploads/2023/02/1-1.png" alt="Vật Lý">
+                <div class="subject-info">
+                    <div class="subject-title">Vật Lý</div>
+                </div>
+            </div>
+        </a>
+
+        <!-- Hóa học -->
+        <a href="hoa-hoc.html" class="subject-link">
+            <div class="subject">
+                <img src="https://chantroisangtao.vn/wp-content/uploads/2023/02/1-3.png" alt="Hóa Học">
+                <div class="subject-info">
+                    <div class="subject-title">Hóa Học</div>
+                </div>
+            </div>
+        </a>
+
+        <!-- Sinh học -->
+        <a href="sinh-hoc.html" class="subject-link">
+            <div class="subject">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz4oWSrBpLG41vnxULKmmzpR9MpcWF3a_MIA&s" alt="Sinh Học">
+                <div class="subject-info">
+                    <div class="subject-title">Sinh Học</div>
+                </div>
+            </div>
+        </a>
+
+        <!-- Lịch sử -->
+        <a href="lich-su.html" class="subject-link">
+            <div class="subject">
+                <img src="https://product.hstatic.net/200000343833/product/bia_shs__page_29_b256d223092c4ffe996c619adfaf2184_master.jpg" alt="Lịch Sử">
+                <div class="subject-info">
+                    <div class="subject-title">Lịch Sử</div>
+                </div>
+            </div>
+        </a>
     </div>
-
-    <!-- Danh sách các môn học -->
-    <ul class="subject-list">
-        <li data-subject="physics" onclick="window.location.href='https://azota.vn/de-thi/blb7qf';">
-            <img src="https://chantroisangtao.vn/wp-content/uploads/2023/02/1-1.png" alt="Vật lý 1">
-            <div class="content">
-                <a href="https://azota.vn/de-thi/blb7qf">[R28] ĐỀ CƯƠNG VẬT LÝ</a>
-                <div class="description">ngẫu nhiên 28 câu trong toàn bộ đề cương.</div>
-            </div>
-        </li>
-        <li data-subject="physics" onclick="window.location.href='https://azota.vn/de-thi/gqrlsa';">
-            <img src="https://chantroisangtao.vn/wp-content/uploads/2023/02/1-1.png" alt="Vật lý 2">
-            <div class="content">
-                <a href="https://azota.vn/de-thi/gqrlsa">[FULL] ĐỀ CƯƠNG VẬT LÝ</a>
-                <div class="description">Toàn bộ đề cương vật lí.</div>
-            </div>
-        </li>
-        <li data-subject="chemistry" onclick="window.location.href='https://azota.vn/de-thi/drg9mt';">
-            <img src="https://chantroisangtao.vn/wp-content/uploads/2023/02/1-3.png" alt="Hóa học 1">
-            <div class="content">
-                <a href="https://azota.vn/de-thi/drg9mt">[FULL] Hoá Học</a>
-                <div class="description">Toàn bộ đề cương hoá học.</div>
-            </div>
-        </li>
-        <li data-subject="chemistry" onclick="window.location.href='https://azota.vn/de-thi/xaoyzu';">
-            <img src="https://chantroisangtao.vn/wp-content/uploads/2023/02/1-3.png" alt="Hóa học 1">
-            <div class="content">
-                <a href="https://azota.vn/de-thi/xaoyzu">Hoá Học bài 13</a>
-                <div class="description">Đề cương hoá bài 13. </div>
-            </div>
-        </li>
-        <li data-subject="chemistry" onclick="window.location.href='https://azota.vn/de-thi/ideksh';">
-            <img src="https://chantroisangtao.vn/wp-content/uploads/2023/02/1-3.png" alt="Hóa học 2">
-            <div class="content">
-                <a href="https://azota.vn/de-thi/ideksh">Hoá Học bài 14</a>
-                <div class="description">Đề cương hoá bài 14.</div>
-            </div>
-        </li>
-        <li data-subject="chemistry" onclick="window.location.href='https://azota.vn/de-thi/voi9l4';">
-            <img src="https://chantroisangtao.vn/wp-content/uploads/2023/02/1-3.png" alt="Hóa học 1">
-            <div class="content">
-                <a href="https://azota.vn/de-thi/voi9l4">Hoá Học bài 15</a>
-                <div class="description">Đề cương hoá bài 15.</div>
-            </div>
-        </li>
-        <li data-subject="chemistry" onclick="window.location.href='https://azota.vn/de-thi/nqks49';">
-            <img src="https://chantroisangtao.vn/wp-content/uploads/2023/02/1-3.png" alt="Hóa học 2">
-            <div class="content">
-                <a href="https://azota.vn/de-thi/nqks49">Hoá Học bài 16</a>
-                <div class="description">Đề cương hoá bài 16.</div>
-            </div>
-        </li>
-        <li data-subject="biology" onclick="window.location.href='https://azota.vn/de-thi/ixdxfg';">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz4oWSrBpLG41vnxULKmmzpR9MpcWF3a_MIA&s" alt="Sinh học 1">
-            <div class="content">
-                <a href="https://azota.vn/de-thi/ixdxfg">Sinh Học bài 14</a>
-                <div class="description">Đề cương sinh học bài 14</div>
-            </div>
-        </li>
-        <li data-subject="biology" onclick="window.location.href='https://azota.vn/de-thi/uglb0n';">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz4oWSrBpLG41vnxULKmmzpR9MpcWF3a_MIA&s" alt="Sinh học 2">
-            <div class="content">
-                <a href="https://azota.vn/de-thi/uglb0n">Sinh Học bài 15</a>
-                <div class="description">Đề cương sinh học bài 15</div>
-            </div>
-        </li>
-        <li data-subject="biology" onclick="window.location.href='https://azota.vn/de-thi/tdzqsr';">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz4oWSrBpLG41vnxULKmmzpR9MpcWF3a_MIA&s" alt="Sinh học 1">
-            <div class="content">
-                <a href="https://azota.vn/de-thi/tdzqsr">Sinh Học bài 17</a>
-                <div class="description">Đề cương sinh học bài 17</div>
-            </div>
-        </li>
-        <li data-subject="biology" onclick="window.location.href='https://azota.vn/de-thi/stzzfd';">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz4oWSrBpLG41vnxULKmmzpR9MpcWF3a_MIA&s" alt="Sinh học 2">
-            <div class="content">
-                <a href="https://azota.vn/de-thi/stzzfd">Sinh Học bài 18</a>
-                <div class="description">Đề cương sinh học bài 18</div>
-            </div>
-        </li>
-        <li data-subject="biology" onclick="window.location.href='https://azota.vn/de-thi/stzzfd';">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz4oWSrBpLG41vnxULKmmzpR9MpcWF3a_MIA&s" alt="Sinh học 2">
-            <div class="content">
-                <a href="https://azota.vn/de-thi/gdxx1m">[FULL] ĐỀ CƯƠNG SINH HỌC</a>
-                <div class="description">full Đề cương sinh học</div>
-            </div>
-        </li>
-        <li data-subject="biology" onclick="window.location.href='https://azota.vn/de-thi/stzzfd';">
-            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRz4oWSrBpLG41vnxULKmmzpR9MpcWF3a_MIA&s" alt="Sinh học 2">
-            <div class="content">
-                <a href="https://azota.vn/de-thi/fva2yn">[R28] ĐỀ CƯƠNG SINH HỌC</a>
-                <div class="description">Ngẫu nhiên 28 câu trong 65 câu</div>
-            </div>
-        </li>
-        <li data-subject="informatics" onclick="window.location.href='https://azota.vn/de-thi/q79yem';">
-            <img src="https://www.vietjack.com/sach-moi/images/sach-tin-hoc-lop-11-ket-noi-tri-thuc-sua2024-1.PNG" alt="Tin học 1">
-            <div class="content">
-                <a href="https://azota.vn/de-thi/q79yem">[R28] Trắc nghim Tin Học</a>
-                <div class="description">Ngẫu nhiên 28 câu trong 65 câu trắc nghiệm</div>
-            </div>
-        </li>
-        <li data-subject="informatics" onclick="window.location.href='https://azota.vn/de-thi/mottg1';">
-            <img src="https://www.vietjack.com/sach-moi/images/sach-tin-hoc-lop-11-ket-noi-tri-thuc-sua2024-1.PNG" alt="Tin học 1">
-            <div class="content">
-                <a href="https://azota.vn/de-thi/mottg1">[FULL] Trắc nghiệm Tin Học</a>
-                <div class="description">Full đề cương trắc nghiệm TIN HỌC.</div>
-            </div>
-        </li>
-        <li data-subject="history" onclick="window.location.href='https://azota.vn/de-thi/f2wvh4';">
-            <img src="https://product.hstatic.net/200000343833/product/bia_shs__page_29_b256d223092c4ffe996c619adfaf2184_master.jpg" alt="Lịch sử 1">
-            <div class="content">
-                <a href="https://azota.vn/de-thi/gwifxc">[ĐỀ 1] Trắc nghiệm Lịch Sử</a>
-                <div class="description">50 câu đầu tiên trắc nghệm lịch sử.</div>
-            </div>
-        </li>
-        <li data-subject="history" onclick="window.location.href='https://azota.vn/de-thi/7mbwye';">
-            <img src="https://product.hstatic.net/200000343833/product/bia_shs__page_29_b256d223092c4ffe996c619adfaf2184_master.jpg" alt="Lịch sử 2">
-            <div class="content">
-                <a href="https://azota.vn/de-thi/bngqxs">[ĐỀ 2] Đề cương Lịch Sử</a>
-                <div class="description">55 câu còn lại trắc nghệm ử.</div>
-            </div>
-        </li>
-        <li data-subject="history" onclick="window.location.href='https://azota.vn/de-thi/f2wvh4';">
-            <img src="https://product.hstatic.net/200000343833/product/bia_shs__page_29_b256d223092c4ffe996c619adfaf2184_master.jpg" alt="Lịch sử 1">
-            <div class="content">
-                <a href="https://azota.vn/de-thi/f2wvh4">[FULL] Trắc nghiệm Lịch Sử</a>
-                <div class="description">Full trắc nghiệm đề cương lịch sử.</div>
-            </div>
-        </li>
-        <li data-subject="history" onclick="window.location.href='https://azota.vn/de-thi/7mbwye';">
-            <img src="https://product.hstatic.net/200000343833/product/bia_shs__page_29_b256d223092c4ffe996c619adfaf2184_master.jpg" alt="Lịch sử 2">
-            <div class="content">
-                <a href="https://azota.vn/de-thi/7mbwye">[R28] Đề cương Lịch Sử</a>
-                <div class="description">Ngẫu nhiên 28 câu trong 105 câu trắc nghiệm sử.</div>
-            </div>
-        </li>
-    </ul>
 
     <script>
-        // Hiệu ứng khi trang được tải
-        document.addEventListener("DOMContentLoaded", function() {
-            const items = document.querySelectorAll(".subject-list li");
-            items.forEach((item, index) => {
-                setTimeout(() => {
-                    item.classList.add("show"); // Thêm class 'show' để hiển thị từng mục
-                }, index * 200); // Độ trễ giữa các mục
+        document.addEventListener("DOMContentLoaded", function () {
+            const searchInput = document.getElementById("query");
+            const subjects = document.querySelectorAll(".subject");
+
+            searchInput.addEventListener("input", function () {
+                const searchTerm = searchInput.value.trim().toLowerCase();
+
+                subjects.forEach((subject) => {
+                    const title = subject.querySelector(".subject-title").textContent.toLowerCase();
+                    if (title.includes(searchTerm)) {
+                        subject.style.display = "flex";
+                    } else {
+                        subject.style.display = "none";
+                    }
+                });
             });
         });
+        
+        
+        subjects.forEach((subject) => {
+    subject.addEventListener("click", function () {
+        subject.style.transform = "scale(0.95)";
+        setTimeout(() => {
+            subject.style.transform = "scale(1)";
+        }, 200);
+    });
+});
 
-        // Lọc môn học và thêm hiệu ứng
-        function filterSubjects() {
-            const selectedSubject = document.getElementById("subject-filter").value;
-            const items = document.querySelectorAll(".subject-list li");
+    document.addEventListener("scroll", function () {
+    const subjects = document.querySelectorAll(".subject");
+    subjects.forEach((subject) => {
+        const subjectPosition = subject.getBoundingClientRect().top;
+        const screenPosition = window.innerHeight / 1.3;
 
-            items.forEach((item, index) => {
-                if (selectedSubject === "all" || item.getAttribute("data-subject") === selectedSubject) {
-                    setTimeout(() => {
-                        item.style.display = "flex"; // Hiển thị mục phù hợp
-                        item.classList.add("show"); // Thêm hiệu ứng
-                    }, index * 100); // Độ trễ giữa các mục
-                } else {
-                    item.style.display = "none"; // Ẩn mục không phù hợp
-                    item.classList.remove("show"); // Xóa hiệu ứng
-                }
-            });
+        if (subjectPosition < screenPosition) {
+            subject.style.opacity = "1";
+            subject.style.transform = "translateY(0)";
         }
+    });
+});
     </script>
+    <a href="https://example.com/lien-he" class="report-button" target="_blank">🚩</a>
 </body>
 </html>
